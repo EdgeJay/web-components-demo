@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "extends": ["airbnb-base", "prettier", "prettier/standard"],
+  "plugins": ["prettier", "import"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "class-methods-use-this": ["error", {
+      "exceptMethods": ["connectedCallback"]
+    }]
+  }
+}
