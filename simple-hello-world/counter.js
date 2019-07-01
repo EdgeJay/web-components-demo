@@ -11,6 +11,8 @@ class SimpleCounter extends HTMLElement {
           display: block;
           margin-bottom: 20px;
           --background-color: lightgrey;
+          --border-radius: 0px;
+          --border: none;
         }
 
         :host(:last-child) {
@@ -20,6 +22,8 @@ class SimpleCounter extends HTMLElement {
         #container {
           padding: 10px 20px;
           background-color: var(--background-color);
+          border-radius: var(--border-radius);
+          border: var(--border);
         }
         
         .content {
@@ -94,6 +98,19 @@ class CounterSlots extends HTMLElement {
         ::slotted(simple-counter) {
           margin-bottom: 0px;
           --background-color: skyblue;
+        }
+
+        ::slotted(simple-counter[slot=slot-1]) {
+          --border-radius: 8px;
+          --border: 2px dashed darkblue;
+        }
+
+        ::slotted(simple-counter[slot=slot-3]) {
+          --background-color: cyan;
+        }
+
+        ::slotted(simple-counter[slot=slot-4]) {
+          --background-color: turquoise;
         }
       </style>
 
