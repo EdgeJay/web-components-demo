@@ -10,7 +10,7 @@ const availableDemos = {
   },
   hello2: {
     desc: 'Run Simple Hello World Example - Part 2',
-    command: ['npx', ['http-server', './simple-hello-world']],
+    command: ['npx', ['http-server', './simple-hello-world-2']],
   },
 };
 

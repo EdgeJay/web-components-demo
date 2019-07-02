@@ -40,7 +40,7 @@ class SimpleCounter extends HTMLElement {
         }
       </style>
       <div id="container">
-        <h1>Counter</h1>
+        <h2>Counter</h2>
         <div class="content">
           <button>Click Me!</button>
           <p>Count: ${this.count}</p>
@@ -64,73 +64,4 @@ class SimpleCounter extends HTMLElement {
   }
 }
 
-const EMPTY_COUNTER_SLOT = '<p>No counter available</p>';
-
-class CounterSlots extends HTMLElement {
-  constructor() {
-    super();
-
-    const shadowRoot = this.attachShadow({ mode: 'open' });
-    shadowRoot.innerHTML = `
-      <style>
-        :host {
-          display: block;
-          margin-top: 20px;
-          border: 1px solid black;
-          padding: 5px 5px;
-        }
-
-        ul {
-          display: flex;
-          flex-flow: row wrap;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        }
-
-        li {
-          margin: 0;
-          padding: 5px;
-          flex: 0 0 calc(50%);
-          box-sizing: border-box;
-        }
-
-        ::slotted(simple-counter) {
-          margin-bottom: 0px;
-          --background-color: skyblue;
-        }
-
-        ::slotted(simple-counter[slot=slot-1]) {
-          --border-radius: 8px;
-          --border: 2px dashed darkblue;
-        }
-
-        ::slotted(simple-counter[slot=slot-3]) {
-          --background-color: cyan;
-        }
-
-        ::slotted(simple-counter[slot=slot-4]) {
-          --background-color: turquoise;
-        }
-      </style>
-
-      <ul>
-        <li>
-          <slot name="slot-1">${EMPTY_COUNTER_SLOT}</slot>
-        </li>
-        <li>
-          <slot name="slot-2">${EMPTY_COUNTER_SLOT}</slot>
-        </li>
-        <li>
-          <slot name="slot-3">${EMPTY_COUNTER_SLOT}</slot>
-        </li>
-        <li>
-          <slot name="slot-4">${EMPTY_COUNTER_SLOT}</slot>
-        </li>
-      </ul>
-    `;
-  }
-}
-
 customElements.define('simple-counter', SimpleCounter);
-customElements.define('counter-slots', CounterSlots);

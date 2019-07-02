@@ -9,15 +9,17 @@
 <body>
   <main>
     <section>
-      <h1>Simple Hello World Example</h1>
+      <h1>Simple Hello World Example 2</h1>
       <ul>
-        <li>Web component class that extends from <code>HTMLElement</code></li>
-        <li>Encapsulated CSS in Shadow DOM</li>
-        <li>Simple state</li>
+        <li>Composition through <code>slots</code></li>
       </ul>
     </section>
     <section>
       <div id="mount"></div>
+      <counter-slots>
+        <simple-counter slot="slot-1"></simple-counter>
+        <simple-counter slot="slot-4"></simple-counter>
+      </counter-slots>
       <button style="margin-top: 20px;">Just a button</button>
     </section>
   </main>
