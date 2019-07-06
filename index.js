@@ -6,11 +6,11 @@ const yargs = require('yargs');
 const availableDemos = {
   hello: {
     desc: 'Run Simple Hello World Example - Part 1',
-    command: ['npx', ['http-server', './simple-hello-world']],
+    command: ['npx', ['http-server', './01-simple-hello-world']],
   },
   hello2: {
     desc: 'Run Simple Hello World Example - Part 2',
-    command: ['npx', ['http-server', './simple-hello-world-2']],
+    command: ['npx', ['http-server', './02-simple-hello-world-2']],
   },
 };
 
