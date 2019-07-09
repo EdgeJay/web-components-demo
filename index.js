@@ -12,6 +12,13 @@ const availableDemos = {
     desc: 'Run Simple Hello World Example - Part 2',
     command: ['npx', ['http-server', './02-simple-hello-world-2']],
   },
+  'vanilla-state': {
+    desc: 'Run Vanilla State Management',
+    command: [
+      'npx',
+      ['webpack-dev-server', '--config', './04-vanilla-state-management/webpack.config.js'],
+    ],
+  },
 };
 
 // eslint-disable-next-line no-unused-expressions
