@@ -12,8 +12,12 @@ const availableDemos = {
     desc: 'Run Simple Hello World Example - Part 2',
     command: ['npx', ['http-server', './02-simple-hello-world-2']],
   },
+  typescript: {
+    desc: 'Run Typescript Example',
+    command: ['npx', ['webpack-dev-server', '--config', './03-typescript/webpack.config.js']],
+  },
   'vanilla-state': {
-    desc: 'Run Vanilla State Management',
+    desc: 'Run Vanilla State Management Example',
     command: [
       'npx',
       ['webpack-dev-server', '--config', './04-vanilla-state-management/webpack.config.js'],
