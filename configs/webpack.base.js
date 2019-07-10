@@ -1,11 +1,43 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-function createWebpackConfig({ folder, pageTitle, entryJS = 'index.js' }) {
+function getBabelOptions(isBabelLoader = true) {
+  const options = {
+    babelrc: false,
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          targets: {
+            browsers: ['last 2 versions'],
+          },
+          modules: false,
+        },
+      ],
+    ],
+    plugins: [
+      [
+        '@babel/plugin-transform-runtime',
+        {
+          corejs: 3,
+        },
+      ],
+    ],
+  };
+
+  if (isBabelLoader) {
+    options.cacheDirectory = true;
+  }
+
+  return options;
+}
+
+function createWebpackConfig({ folder, pageTitle, entryMain = 'index.js' }) {
   return {
     target: 'web',
     entry: {
-      main: path.resolve(folder, entryJS),
+      polyfill: path.resolve(__dirname, '../templates/polyfill.js'),
+      main: path.resolve(folder, entryMain),
     },
     output: {
       path: path.resolve(folder, 'build'),
@@ -13,32 +45,20 @@ function createWebpackConfig({ folder, pageTitle, entryJS = 'index.js' }) {
     module: {
       rules: [
         {
+          test: /\.ts$/,
+          loader: 'awesome-typescript-loader',
+          options: {
+            useBabel: true,
+            babelOptions: getBabelOptions(false),
+            babelCore: '@babel/core',
+          },
+        },
+        {
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
-            options: {
-              babelrc: false,
-              presets: [
-                [
-                  '@babel/preset-env',
-                  {
-                    targets: {
-                      browsers: ['last 2 versions'],
-                    },
-                    modules: false,
-                  },
-                ],
-              ],
-              plugins: [
-                [
-                  '@babel/plugin-transform-runtime',
-                  {
-                    corejs: 3,
-                  },
-                ],
-              ],
-            },
+            options: getBabelOptions(),
           },
         },
       ],
@@ -55,6 +75,9 @@ function createWebpackConfig({ folder, pageTitle, entryJS = 'index.js' }) {
       hot: true,
     },
     devtool: 'source-map',
+    resolve: {
+      extensions: ['.ts', '.js'],
+    },
   };
 }
 
