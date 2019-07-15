@@ -12,15 +12,19 @@ const availableDemos = {
     desc: 'Run Simple Hello World Example - Part 2',
     command: ['npx', ['http-server', './02-simple-hello-world-2']],
   },
+  'observed-attributes': {
+    desc: 'Run Observed Attributes',
+    command: ['npx', ['http-server', './03-observed-attributes']],
+  },
   typescript: {
     desc: 'Run Typescript Example',
-    command: ['npx', ['webpack-dev-server', '--config', './03-typescript/webpack.config.js']],
+    command: ['npx', ['webpack-dev-server', '--config', './04-typescript/webpack.config.js']],
   },
   'vanilla-state': {
     desc: 'Run Vanilla State Management Example',
     command: [
       'npx',
-      ['webpack-dev-server', '--config', './04-vanilla-state-management/webpack.config.js'],
+      ['webpack-dev-server', '--config', './05-vanilla-state-management/webpack.config.js'],
     ],
   },
 };

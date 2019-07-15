@@ -4,29 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>02 - Simple Hello World Example 2 | Web Components Demo</title>
+  <title>03 - Observed Attributes | Web Components Demo</title>
 </head>
 <body>
   <main>
     <section>
-      <h1>02 - Simple Hello World Example 2 | Web Components Demo</h1>
+      <h1>03 - Observed Attributes | Web Components Demo</h1>
       <ul>
-        <li>Composition through <code>slots</code></li>
+        <li>Observing changes to custom element attributes</li>
       </ul>
     </section>
     <section>
       <div id="mount"></div>
       <counter-slots>
-        <simple-counter slot="slot-1"></simple-counter>
-        <simple-counter slot="slot-4"></simple-counter>
+        <simple-counter slot="slot-1" count="2"></simple-counter>
       </counter-slots>
-      <button style="margin-top: 20px;">Just a button</button>
     </section>
   </main>
   <script src="./counter.js"></script>
   <script>
     const Counter = customElements.get('simple-counter');
-    document.getElementById('mount').appendChild(new Counter());
     document.getElementById('mount').appendChild(new Counter());
   </script>
 </body>
