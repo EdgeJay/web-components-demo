@@ -14,11 +14,18 @@ export default class TodoList extends HTMLElement {
     super();
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.innerHTML = `
-      <div class="container">
+      <style>
+        @import "//cdn.muicss.com/mui-0.9.43/css/mui.min.css";
+
+        .container {
+          margin-top: 20px;
+        }
+      </style>
+      <div class="container mui-panel">
         <template id="item-template">
           <li><p></p></li>
         </template>
-        <ul></ul>
+        <ul class="mui-list--unstyled"></ul>
       </div>
     `;
     this._totalTodoItems = 0;

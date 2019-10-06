@@ -6,9 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link href="//cdn.muicss.com/mui-0.9.43/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <style>
+      .mui-container {
+        display: flex;
+      }
+      #mount {
+        width: 100%;
+      }
+    </style>
     <script src="//cdn.muicss.com/mui-0.9.43/js/mui.min.js"></script>
   </head>
   <body>
-    <div id="mount"></div>
+    <header class="mui-appbar mui--z1">
+      <div class="mui-container">
+          <h1 class='mui--text-title'>Todo List</h1>
+      </div>
+    </header>
+    <main class="mui-container">
+      <div id="mount"></div>
+    </main>
   </body>
 </html>

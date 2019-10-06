@@ -31,7 +31,12 @@ function getBabelOptions(isBabelLoader = true) {
   return options;
 }
 
-function createWebpackConfig({ folder, pageTitle, entryMain = 'index.js' }) {
+function createWebpackConfig({
+  folder,
+  pageTitle,
+  htmlTemplate = '../templates/index.html',
+  entryMain = 'index.js',
+}) {
   return {
     target: 'web',
     entry: {
@@ -65,7 +70,7 @@ function createWebpackConfig({ folder, pageTitle, entryMain = 'index.js' }) {
     plugins: [
       new HTMLWebpackPlugin({
         title: pageTitle,
-        template: path.resolve(__dirname, '../templates/index.html'),
+        template: path.resolve(__dirname, htmlTemplate),
         favicon: path.resolve(__dirname, '../templates/favicon.ico'),
       }),
     ],
