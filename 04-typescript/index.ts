@@ -1,31 +1,43 @@
-async function bar() {
-  return 'bar';
+enum TodoItemStatus {
+  Pending = 'PENDING',
+  Completed = 'COMPLETED',
+  Archived = 'ARCHIVED',
 }
 
-async function foo(func: typeof bar) {
-  const result = await func();
-  console.log(result);
+interface ITodoItem {
+  status: TodoItemStatus;
+  createdOn: Date;
+  updatedOn: Date;
 }
 
-foo(bar).then(() => console.log('done!'));
+class TodoList extends HTMLElement {
+  private _container: HTMLElement;
+  private _listContainer: HTMLElement;
 
-class SimpleButton extends HTMLElement {
   constructor() {
     super();
-
-    const shadowRoot = this.attachShadow({
-      mode: 'open',
-    });
-
+    const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.innerHTML = `
-      <button>Foo!</button>
+      <div class="container">
+        <ul></ul>
+      </div>
     `;
+    this._container = this.shadowRoot.querySelector('.container');
+    this._listContainer = this._container.querySelector('ul');
+  }
+
+  get container() {
+    return this._container;
+  }
+
+  get listContainer() {
+    return this._listContainer;
   }
 }
 
-customElements.define('simple-button', SimpleButton);
+customElements.define('todo-list', TodoList);
 
-const El = customElements.get('simple-button');
-const elem = new El();
-console.log(elem);
-document.getElementById('mount').appendChild(elem);
+const List = customElements.get('todo-list');
+const list = new List();
+
+document.querySelector('#mount').appendChild(list);
