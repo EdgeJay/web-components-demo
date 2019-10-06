@@ -11,7 +11,6 @@ function getBabelOptions(isBabelLoader = true) {
           targets: {
             browsers: ['last 2 versions'],
           },
-          modules: false,
         },
       ],
     ],
