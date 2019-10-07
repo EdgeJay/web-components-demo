@@ -6,45 +6,100 @@ export { TodoItemStatus };
 export default class TodoList extends HTMLElement {
   private _totalTodoItems: number;
   private _todoItems: ITodoItemData[];
-  private _container: HTMLElement;
   private _listContainer: HTMLElement;
   private _templateNode: HTMLTemplateElement;
+  private _todoInput: HTMLInputElement;
+  private _emptyMessage: HTMLParagraphElement;
+  private _submitButton: HTMLButtonElement;
 
   constructor() {
     super();
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     const shadowRoot = this.attachShadow({ mode: 'open' });
     shadowRoot.innerHTML = `
       <style>
         @import "//cdn.muicss.com/mui-0.9.43/css/mui.min.css";
+        @import "//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
 
-        .container {
+        .input-form {
           margin-top: 20px;
         }
+
+        #empty-message {
+          text-align: center;
+          margin: 0;
+        }
+
+        .container ul {
+          margin: 0;
+        }
+
+        .container ul li {
+          display: flex;
+          flex-flow: row nowrap;
+          align-items: center;
+          padding: 10px 0;
+        }
+
+        .container ul li button {
+          background-color: white;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          width: 20px;
+          height: 20px;
+          padding: 1px 2px;
+        }
+
+        .container ul li p {
+          flex: 1;
+        }
+
+        .container ul li p {
+          margin: 0;
+        }
       </style>
+      <div class="input-form mui-panel">
+        <form class="mui-form">
+          <div class="mui-textfield">
+            <input type="text" id="todo-input" placeholder="Enter todo item here..." />
+          </div>
+          <button class="mui-btn mui-btn--raised" id="submit-btn">Add To List</button>
+        </form>
+      </div>
       <div class="container mui-panel">
         <template id="item-template">
-          <li><p></p></li>
+          <li><p></p><button><i class="fa fa-trash"></i></button></li>
         </template>
+        <p id="empty-message">Your list is empty!</p>
         <ul class="mui-list--unstyled"></ul>
       </div>
     `;
     this._totalTodoItems = 0;
     this._todoItems = [];
-    this._container = this.shadowRoot.querySelector('.container');
-    this._listContainer = this._container.querySelector('ul');
-    this._templateNode = this._container.querySelector('#item-template');
+    this._listContainer = this.shadowRoot.querySelector('.container ul');
+    this._templateNode = this.shadowRoot.querySelector('#item-template');
+    this._todoInput = this.shadowRoot.querySelector('#todo-input');
+    this._emptyMessage = this.shadowRoot.querySelector('#empty-message');
+    this._submitButton = this.shadowRoot.querySelector('#submit-btn');
+    this._submitButton.addEventListener('click', this.handleSubmit);
   }
 
   get todoItems() {
     return this._todoItems;
   }
 
-  get container() {
-    return this._container;
-  }
-
   get listContainer() {
     return this._listContainer;
+  }
+
+  handleSubmit(evt: Event) {
+    evt.preventDefault();
+    const message = this._todoInput.value;
+    this.addItem(message);
+    this._todoInput.value = '';
+    this._todoInput.focus();
   }
 
   addItem(message: string, status: TodoItemStatus = TodoItemStatus.Pending): number {
@@ -58,6 +113,7 @@ export default class TodoList extends HTMLElement {
       updatedOn: now,
     });
     this.refreshItems();
+    this.refreshPanel();
     return this._totalTodoItems;
   }
 
@@ -68,18 +124,38 @@ export default class TodoList extends HTMLElement {
     
     if (removed) {
       this.refreshItems();
+      this.refreshPanel();
     }
     
     return removed;
   }
 
-  refreshItems() {
+  removeAllItems() {
     const nodes = this.listContainer.querySelectorAll('li');
     nodes.forEach(node => this.listContainer.removeChild(node));
+  }
+
+  refreshItems() {
+    this.removeAllItems();
+
+    let index = 0;
     this.todoItems.forEach(item => {
       const node = document.importNode(this._templateNode.content, true);
       node.querySelector('p').innerText = item.message;
+      node.querySelector('button').addEventListener('click', () => {
+        this.removeItem(item.index);
+      });
       this.listContainer.appendChild(node);
+      
+      if (index > 0) {
+        this.listContainer.querySelector('li:last-child').setAttribute('class', 'mui--divider-top');
+      }
+
+      index += 1;
     });
+  }
+
+  refreshPanel() {
+    this._emptyMessage.style.display = this._todoItems.length > 0 ? 'none' : 'block';
   }
 }
