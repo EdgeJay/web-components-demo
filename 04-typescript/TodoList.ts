@@ -52,12 +52,20 @@ export default class TodoList extends HTMLElement {
           padding: 1px 2px;
         }
 
+        .container ul li button + button {
+          margin-left: 5px;
+        }
+
         .container ul li p {
           flex: 1;
         }
 
         .container ul li p {
           margin: 0;
+        }
+
+        .container ul li p s {
+          color: #ccc;
         }
       </style>
       <div class="input-form mui-panel">
@@ -70,7 +78,11 @@ export default class TodoList extends HTMLElement {
       </div>
       <div class="container mui-panel">
         <template id="item-template">
-          <li><p></p><button><i class="fa fa-trash"></i></button></li>
+          <li>
+            <p></p>
+            <button class="check-btn"><i class="fa fa-check"></i></button>
+            <button class="delete-btn"><i class="fa fa-trash"></i></button>
+          </li>
         </template>
         <p id="empty-message">Your list is empty!</p>
         <ul class="mui-list--unstyled"></ul>
@@ -117,6 +129,15 @@ export default class TodoList extends HTMLElement {
     return this._totalTodoItems;
   }
 
+  updateItem(index: number, { message, status }: { message?: string, status?: TodoItemStatus }) {
+    const item = this.todoItems.find(item => item.index === index);
+    if (item) {
+      item.message = message || item.message;
+      item.status = status || item.status;
+    }
+    this.refreshItems();
+  }
+
   removeItem(index: number): boolean {
     const newList = this.todoItems.filter(item => item.index !== index);
     const removed = newList.length < this.todoItems.length;
@@ -141,10 +162,40 @@ export default class TodoList extends HTMLElement {
     let index = 0;
     this.todoItems.forEach(item => {
       const node = document.importNode(this._templateNode.content, true);
-      node.querySelector('p').innerText = item.message;
-      node.querySelector('button').addEventListener('click', () => {
+      const checkBtn = node.querySelector('button.check-btn');
+      const deleteBtn = node.querySelector('button.delete-btn');
+
+      // setup message
+      if (item.status === TodoItemStatus.Completed) {
+        node.querySelector('p').innerHTML = `<s>${item.message}</s>`;
+      } else {
+        node.querySelector('p').innerHTML = item.message;
+      }
+      
+      // setup listeners for buttons
+      node.querySelector('button.check-btn').addEventListener('click', evt => {
+        const btn = evt.currentTarget as HTMLButtonElement;
+        const status = item.status === TodoItemStatus.Pending ? TodoItemStatus.Completed : TodoItemStatus.Pending;
+        this.updateItem(item.index, {
+          status,
+        });
+      });
+      
+      switch (item.status) {
+        case TodoItemStatus.Pending:
+          checkBtn.querySelector('i.fa').classList.add('fa-check');
+          checkBtn.querySelector('i.fa').classList.remove('fa-times');
+          break;
+        case TodoItemStatus.Completed:
+          checkBtn.querySelector('i.fa').classList.remove('fa-check');
+          checkBtn.querySelector('i.fa').classList.add('fa-times');
+          break;
+      }
+
+      deleteBtn.addEventListener('click', () => {
         this.removeItem(item.index);
       });
+      
       this.listContainer.appendChild(node);
       
       if (index > 0) {
