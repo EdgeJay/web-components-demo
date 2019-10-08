@@ -20,11 +20,11 @@ const availableDemos = {
     desc: 'Run Typescript Example',
     command: ['npx', ['webpack-dev-server', '--config', './04-typescript/webpack.config.js']],
   },
-  'vanilla-state': {
-    desc: 'Run Vanilla State Management Example',
+  'simple-state': {
+    desc: 'Run Simple State Management Example',
     command: [
       'npx',
-      ['webpack-dev-server', '--config', './05-vanilla-state-management/webpack.config.js'],
+      ['webpack-dev-server', '--config', './05-simple-state-management/webpack.config.js'],
     ],
   },
 };
