@@ -49,10 +49,23 @@
 					</section>
 				</section>
 				<section>
-					<h2>So I want to do a more in-depth talk about Web Components</h2>
+					<section>
+						<h3>A few months ago, I came across an article about Web Components...</h3>
+					</section>
+					<section>
+						<a href="https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c"><img src="./img/web_components.png" /></a>
+					</section>
+					<section data-background="https://media.giphy.com/media/xT9IgnRcUvYICxi5pu/giphy.gif"></section>
+					<section><h2>🤔</h2></section>
+					<section><h3>So I decided to give it a try</h3></section>
+				</section>
+				<section>
+					<h3>And I want to share about my experiment with Web Components</h3>
 					<ul>
 						<li>Browser Compatibility</li>
-						<li>CSS</li>
+						<li>Shimming</li>
+						<li>Styling Web Components</li>
+						<li>Slots & Templates</li>
 						<li>Typescript</li>
 						<li>State Management</li>
 						<li>Pre-rendered / Server-Side Rendered Pages</li>
@@ -69,13 +82,10 @@
 						<h2>Why web components?</h2>
 					</section>
 					<section>
-						<h3><span class="fragment">Oh it's the latest web framework</span> <span class="fragment">it has so many cool features</span> <span class="fragment">and everybody is using it</span> <span class="fragment">and it is created by the</span> <span class="fragment">largest social media company in the whole world</span> <span class="fragment">OMG sooo shiny</span> <span class="fragment">I must use in all of projects from now on!</span></h3>
-					</section>
-					<section data-background="https://media.giphy.com/media/zXRWh5Xp8rxny/giphy.gif"></section>
-					<section>
 						<ul>
 							<li class="fragment">Part of web standards.</li>
 							<li class="fragment">Be knowledgeable in native language and API rather than being "locked into" specific frameworks.</li>
+							<li class="fragment">Reuseable code.</li>
 							<li class="fragment">Build leaner sites.</li>
 							<li class="fragment">Compatible with 3rd party web frameworks.</li>
 							<li class="fragment">3rd party web frameworks/libraries might not stay around forever.</li>
@@ -87,18 +97,57 @@
 					<section>
 						<h2>Browser Compatibility</h2>
 					</section>
-					<section data-background-iframe="https://caniuse.com/#feat=custom-elementsv1"></section>
-					<section data-background-iframe="https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements"></section>
+					<section>
+						<a href="https://caniuse.com/#feat=custom-elementsv1" target="_blank"><img src="./img/caniuse.png" /></a>
+					</section>
+					<section>
+						<a href="https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements"><img src="./img/whatwg_custom-elements.png" /></a>
+					</section>
 				</section>
 				<section>
 					<section>
-						<h2>CSS</h2>
+						<h2>Shimming</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Styling Web Components</h2>
+					</section>
+					<section>
+						<ul>
+							<li class="fragment">CSS defined inside web component is scoped to the component itself, which means</li>
+							<li class="fragment">Component styles will not pollute global styles.</li>
+							<li class="fragment">Elements inside different components can use identical class names, with their own unique style attributes.</li>
+						</ul>
 					</section>
 					<section>
 						<h3>You can still use global styles (but to a certain degree).</h3>
 					</section>
 					<section>
-						<h3>You can still use global styles (but to a certain degree).</h3>
+						<ul>
+							<li>Elements used inside web components are still affected by globally defined styles for common tags (h1, p, a, button, etc)</li>
+							<li>However, elements inside web components will not be able to access styles from imported stylesheets via usual <pre><code>&lt;link rel="stylesheet" href="&hellip;" /&gt;</code></pre> method.</li>
+						</ul>
+					</section>
+					<section>
+						<ul>
+							<li>Workaround is to use 
+								<pre><code>
+&lt;style&gt;
+	@import "//cdn.muicss.com/mui-0.9.43/css/mui.min.css";
+	&hellip;
+								</code></pre> inside the web component while initialising the component's innerHTML via shadowRoot.
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h3>How to prevent global styles from affecting components inside the web component?</h3>
+						<p class="fragment"><a href="https://css-tricks.com/styling-a-web-component/#article-header-id-1" target="_blank">From css-tricks: Shadow DOMing the template</a></p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Slots</h2>
 					</section>
 				</section>
 				<section>
@@ -109,13 +158,27 @@
 				</section>
 				<section>
 					<section>
-						<h2>Reference materials</h2>
+						<h2>My Conclusion</h2>
 					</section>
 					<section>
+						<h3>Should we ditch our frontend frameworks now?</h3>
+					</section>
+					<section data-background="https://media.giphy.com/media/d2ZcfODrNWlA5Gg0/giphy.gif" data-background-size="contain"></section>
+					<section>
+						<h3>Can I start to use web components in my new/existing projects?</h3>
+					</section>
+					<section data-background="https://media.giphy.com/media/SVgKToBLI6S6DUye1Y/giphy.gif"></section>
+					<section>
+						<h3>It depends...</h3>
 						<ul>
-							<li><a href="https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c" target="_blank">https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c</a></li>
-							<li></li>
-							<li></li>
+							<li>Your project requirements
+								<ul>
+									<li>Browser support</li>
+									<li>How complex is your app?</li>
+								</ul>
+							</li>
+							<li>If you want to use as little 3rd-party frameworks/libraries as possible</li>
+							<li>Word of caution: Avoid the "shiny ball syndrome"</li>
 						</ul>
 					</section>
 				</section>
@@ -125,6 +188,18 @@
 					</section>
 					<section>
 						<p><a href="https://github.com/EdgeJay/web-components-demo" target="_blank">https://github.com/EdgeJay/web-components-demo</a></p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Reference materials</h2>
+					</section>
+					<section>
+						<ul>
+							<li><a href="https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c" target="_blank">https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c</a></li>
+							<li><a href="https://css-tricks.com/styling-a-web-component/" target="_blank">https://css-tricks.com/styling-a-web-component/</a></li>
+							<li></li>
+						</ul>
 					</section>
 				</section>
 				<section data-background="https://media.giphy.com/media/lCN6LF3S1fQWc/giphy.gif">
@@ -152,6 +227,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				hash: true,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
