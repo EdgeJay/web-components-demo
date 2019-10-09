@@ -63,12 +63,10 @@
 					<h3>And I want to share about my experiment with Web Components</h3>
 					<ul>
 						<li>Browser Compatibility</li>
-						<li>Shimming</li>
+						<li>ES5 vs ES2015</li>
 						<li>Styling Web Components</li>
 						<li>Slots & Templates</li>
 						<li>Typescript</li>
-						<li>State Management</li>
-						<li>Pre-rendered / Server-Side Rendered Pages</li>
 					</ul>
 				</section>
 				<section>
@@ -83,13 +81,12 @@
 					</section>
 					<section>
 						<ul>
-							<li class="fragment">Part of web standards.</li>
+							<li>Part of web standards.</li>
 							<li class="fragment">Be knowledgeable in native language and API rather than being "locked into" specific frameworks.</li>
 							<li class="fragment">Reuseable code.</li>
 							<li class="fragment">Build leaner sites.</li>
 							<li class="fragment">Compatible with 3rd party web frameworks.</li>
-							<li class="fragment">3rd party web frameworks/libraries might not stay around forever.</li>
-							<li class="fragment">Remember the "React license issue"?</li>
+							<li class="fragment">Major 3rd party web frameworks/libraries are supportive of web components.</li>
 						</ul>
 					</section>
 				</section>
@@ -97,16 +94,18 @@
 					<section>
 						<h2>Browser Compatibility</h2>
 					</section>
-					<section>
-						<a href="https://caniuse.com/#feat=custom-elementsv1" target="_blank"><img src="./img/caniuse.png" /></a>
-					</section>
-					<section>
-						<a href="https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements"><img src="./img/whatwg_custom-elements.png" /></a>
-					</section>
+					<section data-background="./img/caniuse.png" data-background-size="contain"></section>
+					<section data-background="./img/whatwg_custom-elements.png" data-background-size="contain"></section>
 				</section>
 				<section>
 					<section>
-						<h2>Shimming</h2>
+						<h2>ES5 vs ES2015</h2>
+						<ul>
+							<li>Based on <a href="https://github.com/webcomponents/polyfills/tree/master/packages/custom-elements#es5-vs-es2015" target="_blank">README</a> from <a href="https://github.com/webcomponents" target="_blank">webcomponents</a>.</li>
+							<li>Custom Elements v1 spec is not compatible with ES5 style classes.</li>
+							<li>If your project transpiles code to ES5, it will not work with native implementation of Custom Elements.</li>
+							<li>Can use <a href="https://github.com/webcomponents/custom-elements/blob/master/src/native-shim.js" target="_blank">native-shim.js</a> as workaround (In this demo's repo it can be found in /templates/polyfill.js).</li>
+						</ul>
 					</section>
 				</section>
 				<section>
@@ -115,7 +114,7 @@
 					</section>
 					<section>
 						<ul>
-							<li class="fragment">CSS defined inside web component is scoped to the component itself, which means</li>
+							<li>CSS defined inside web component is scoped to the component itself, which means</li>
 							<li class="fragment">Component styles will not pollute global styles.</li>
 							<li class="fragment">Elements inside different components can use identical class names, with their own unique style attributes.</li>
 						</ul>
@@ -147,14 +146,18 @@
 				</section>
 				<section>
 					<section>
-						<h2>Slots</h2>
+						<h2>Slots &amp; Templates</h2>
 					</section>
 				</section>
 				<section>
 					<h2>Typescript</h2>
 				</section>
 				<section>
-					<h2>State Management</h2>
+					<h2>To be discussed in future talks</h2>
+					<ul>
+						<li>State Management</li>
+						<li>Pre-rendered / server-side rendered pages</li>
+					</ul>
 				</section>
 				<section>
 					<section>
@@ -171,14 +174,15 @@
 					<section>
 						<h3>It depends...</h3>
 						<ul>
-							<li>Your project requirements
+							<li class="fragment">On your project requirements
 								<ul>
 									<li>Browser support</li>
 									<li>How complex is your app?</li>
 								</ul>
 							</li>
-							<li>If you want to use as little 3rd-party frameworks/libraries as possible</li>
-							<li>Word of caution: Avoid the "shiny ball syndrome"</li>
+							<li class="fragment">Bear in mind that Web Components is mainly about UI</li>
+							<li class="fragment">If you want to use as little 3rd-party frameworks/libraries as possible</li>
+							<li class="fragment">Word of caution: Avoid the "shiny ball syndrome"</li>
 						</ul>
 					</section>
 				</section>
@@ -197,8 +201,10 @@
 					<section>
 						<ul>
 							<li><a href="https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c" target="_blank">https://blog.usejournal.com/web-components-will-replace-your-frontend-framework-3b17a580831c</a></li>
+							<li><a href="https://medium.com/javascript-in-plain-english/could-web-components-actually-compliment-javascript-frameworks-5-reasons-why-i-think-so-971eee82ee85">https://medium.com/javascript-in-plain-english/could-web-components-actually-compliment-javascript-frameworks-5-reasons-why-i-think-so-971eee82ee85</a></li>
 							<li><a href="https://css-tricks.com/styling-a-web-component/" target="_blank">https://css-tricks.com/styling-a-web-component/</a></li>
-							<li></li>
+							<li><a href="https://caniuse.com/#feat=custom-elementsv1" target="_blank">https://caniuse.com/#feat=custom-elementsv1</a></li>
+							<li><a href="https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements">https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements</a></li>
 						</ul>
 					</section>
 				</section>
